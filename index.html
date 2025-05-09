@@ -4,19 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=”icon” href=“favicon.ico”>
-    <title>BBTP 2</title>
+    <title>BBTP2</title>
 </head>
 <body>
-    <p>Hello world2</p>
+    <h1>Binary Battle Practice Tool v2</h1>
 </body>
 </html>
 
+
 <style>
-p {
-    color: red;
+body {
+    background-color: gray;
 }
 </style>
 
+
 <script>
-    console.log("Hello world");
+/**
+ * 乱数を生成する関数
+ * @param {number} min - 最小値
+ * @param {number} max - 最大値
+ * @returns {number} - 生成された乱数
+ */
+function getRandomInt(min, max) {
+    min = Math.ceil(min); // 最小値を切り上げ
+    max = Math.floor(max); // 最大値を切り捨て
+
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log(getRandomInt(1, 255));
 </script>
