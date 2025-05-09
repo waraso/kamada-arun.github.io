@@ -9,11 +9,16 @@
 <body>
     <h1 class='title'>Binary Battle Practice Tool v2</h1>
     <p id='q-number'>-</p>
+    <div id='correct-answer' style="display: none;">
+        <p>正解: </p>
+        <span id='correct-answer-value'>-</span>
+    </div>
     <button id='start-button'>Start</button>
-    <div id="answer">
+    <div id="answer" style="display: none;">
         <button class="ans-0">0</button>
         <button class="ans-1">1</button>
     </div>
+    <button class="next-button" style="display: none;">Next</button>
 </body>
 </html>
 
@@ -83,18 +88,22 @@ body {
  * @returns {number} - 生成された乱数
  */
 function getRandomInt(min, max) {
-    min = Math.ceil(min); // 最小値を切り上げ
-    max = Math.floor(max); // 最大値を切り捨て
+    min = Math.ceil(min);
+    max = Math.floor(max);
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-document.getElementById('start-button').addEventListener('click', function() {
+function changeNumber() {
     const qNumber = document.getElementById('q-number');
-    const startButton = document.getElementById('start-button');
-
     qNumber.textContent = getRandomInt(1, 255);
+}
+
+document.getElementById('start-button').addEventListener('click', function() {
+    const startButton = document.getElementById('start-button');
     startButton.style.display = 'none';
+
+    changeNumber();
 });
 
 document.querySelector('.ans-0').addEventListener('click', function() {
