@@ -63,15 +63,12 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-document.addEventListener("start-button", function() {
+document.getElementById("start-button").addEventListener("click", function() {
     const qNumber = document.getElementById("q-number");
     const startButton = document.getElementById("start-button");
 
-    startButton.addEventListener("click", function() {
-        // 乱数を生成して表示
-        const randomNum = getRandomInt(1, 255);
-        qNumber.textContent = randomNum;
-    });
+    qNumber.textContent = rangetRandomInt(1, 255);
+    startButton.style.display = "none"; // ボタンを非表示にする
 });
 
 console.log(getRandomInt(1, 255));
