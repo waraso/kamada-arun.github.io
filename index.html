@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang='ja'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel=”icon” href=“favicon.ico”>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='icon' href='favicon.ico'>
     <title>BBTP2</title>
 </head>
 <body>
-    <h1 class="title">Binary Battle Practice Tool v2</h1>
-    <p id="q-number">-</p>
-    <button id="start-button">Start</button>
+    <h1 class='title'>Binary Battle Practice Tool v2</h1>
+    <p id='q-number'>-</p>
+    <button id='start-button'>Start</button>
 </body>
 </html>
 
@@ -63,12 +63,19 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-document.getElementById("start-button").addEventListener("click", function() {
-    const qNumber = document.getElementById("q-number");
-    const startButton = document.getElementById("start-button");
+document.getElementById('start-button').addEventListener('click', function() {
+    const qNumber = document.getElementById('q-number');
+    const startButton = document.getElementById('start-button');
 
-    qNumber.textContent = rangetRandomInt(1, 255);
-    startButton.style.display = "none"; // ボタンを非表示にする
+    qNumber.textContent = getRandomInt(1, 255);
+    startButton.style.display = 'none'; // ボタンを非表示にする
+});
+
+document.addEventListener('keydown', event => {
+    if (event.code === 'Digit1') {
+    }
+    if (event.code === 'Digit2') {
+    }
 });
 
 console.log(getRandomInt(1, 255));
