@@ -10,6 +10,10 @@
     <h1 class='title'>Binary Battle Practice Tool v2</h1>
     <p id='q-number'>-</p>
     <button id='start-button'>Start</button>
+    <div id="answer">
+        <button class="ans-0">0</button>
+        <button class="ans-1">1</button>
+    </div>
 </body>
 </html>
 
@@ -46,6 +50,28 @@ body {
 #start-button:hover {
     background-color: #0056b3;
 }
+
+#answer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#answer button {
+    margin: 0 10px;
+    padding: 20px 40px;
+    font-size: 2em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#answer button:hover {
+    background-color: #218838;
+}
+#answer button:active {
+    background-color: #1e7e34;
+}
 </style>
 
 
@@ -68,15 +94,27 @@ document.getElementById('start-button').addEventListener('click', function() {
     const startButton = document.getElementById('start-button');
 
     qNumber.textContent = getRandomInt(1, 255);
-    startButton.style.display = 'none'; // ボタンを非表示にする
+    startButton.style.display = 'none';
+});
+
+document.querySelector('.ans-0').addEventListener('click', function() {
+    console.log('Answer 0 clicked');
+});
+
+document.querySelector('.ans-1').addEventListener('click', function() {
+    console.log('Answer 1 clicked');
 });
 
 document.addEventListener('keydown', event => {
     if (event.code === 'Digit1') {
-        console.log('1が押されました');
+        document.querySelector('.ans-0').click();
     }
     if (event.code === 'Digit2') {
-        console.log('2が押されました');
+        document.querySelector('.ans-1').click();
+    }
+    if (event.code === 'Space') {
+        event.preventDefault();
+        console.log('Space key pressed');
     }
 });
 
