@@ -63,5 +63,16 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+document.addEventListener("start-button", function() {
+    const qNumber = document.getElementById("q-number");
+    const startButton = document.getElementById("start-button");
+
+    startButton.addEventListener("click", function() {
+        // 乱数を生成して表示
+        const randomNum = getRandomInt(1, 255);
+        qNumber.textContent = randomNum;
+    });
+});
+
 console.log(getRandomInt(1, 255));
 </script>
