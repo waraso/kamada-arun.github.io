@@ -109,12 +109,10 @@ function changeNumber() {
     qNumber.textContent = getRandomInt(1, 255);
 }
 
-function calcCorrectAnswer(index, ) {
+function calcCorrectAnswer(index) {
     const qNumber = document.getElementById('q-number').textContent;
     const intNum = parseInt(qNumber, 10);
-    if (true) {
-
-    }
+    return (intNum >> (index - 1)) & 1;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
