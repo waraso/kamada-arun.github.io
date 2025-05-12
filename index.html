@@ -40,6 +40,7 @@
 
 <style>
 body {
+    position: relative; /* 子要素の絶対位置指定の基準 */
     background-color: #0A0F1C;
     color: white;
 }
@@ -125,9 +126,14 @@ body {
 }
 
 #correct-answer {
+    position: absolute; /* 絶対位置指定 */
+    top: 50%; /* 上からの位置を調整 */
+    left: 50%; /* 左からの位置を調整 */
+    transform: translate(-50%, -50%); /* 中央揃え */
     text-align: center;
     font-size: 2em;
-    margin-top: 20px;
+    margin-top: 0; /* 不要な余白を削除 */
+    z-index: 10; /* 他の要素より前面に表示 */
 }
 #correct-answer-value {
     font-weight: bold;
@@ -135,6 +141,8 @@ body {
 #correct-answer svg {
     display: block;
     margin: 0 auto;
+    width: 200px;
+    height: auto;
 }
 </style>
 
