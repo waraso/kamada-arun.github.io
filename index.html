@@ -5,19 +5,22 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='icon' href='favicon.ico'>
     <title>BBTP2</title>
+    <link rel='stylesheet' href='style.css'>
 </head>
 <body>
     <h1 class='title'>Binary Battle Practice Tool v2</h1>
-    <p id='q-number'>-</p>
+    <div style="height: 10rem;">
+        <p id='q-number'>-</p>
+        <!-- O -->
+        <svg id="ans-o" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="#FF0000" stroke-width="20"/></svg>
+        <!-- X -->
+        <svg id="ans-x" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="194.071" y1="7.07107" x2="8.07106" y2="193.071" stroke="#0000FF" stroke-width="20"/><line y1="-10" x2="263.044" y2="-10" transform="matrix(0.707107 0.707107 0.707107 -0.707107 15 0)" stroke="#0000FF" stroke-width="20"/></svg>
+    </div>
     <div id='correct-answer' style="display: none;">
         <button id="next-button" style="display: none;">Next</button>
         <span>正解: </span>
         <span id='correct-answer-value'>-</span>
         <br />
-        <!-- O -->
-        <svg id="ans-o" style="display: none;" width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="#FF0000" stroke-width="20"/></svg>
-        <!-- X -->
-        <svg id="ans-x" style="display: none;" width="202" height="201" viewBox="0 0 202 201" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="194.071" y1="7.07107" x2="8.07106" y2="193.071" stroke="#0000FF" stroke-width="20"/><line y1="-10" x2="263.044" y2="-10" transform="matrix(0.707107 0.707107 0.707107 -0.707107 15 0)" stroke="#0000FF" stroke-width="20"/></svg>
     </div>
     <button id='start-button'>Start</button>
     <select id="difficulty">
@@ -29,220 +32,11 @@
         <option value="6">6</option>
         <option value="7">7</option>
         <option value="8">8</option>
-        <option value="9">9</option>
     </select>
     <div id="answer" style="display: none;">
         <button class="ans">0</button>
         <button class="ans">1</button>
     </div>
 </body>
+<script src='script.js'></script>
 </html>
-
-
-<style>
-body {
-    background-color: #0A0F1C;
-    color: white;
-}
-
-.title {
-    font-size: 3em;
-    text-align: center;
-    margin-top: 20px;
-}
-
-#q-number {
-    font-size: 5em;
-    text-align: center;
-    margin-top: 20px;
-}
-
-#start-button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    font-size: 1.5em;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#start-button:hover {
-    background-color: #0056b3;
-}
-
-#answer {
-    justify-content: center;
-    margin-top: 20px;
-}
-#answer button {
-    margin: 0 10px;
-    padding: 20px 40px;
-    font-size: 2em;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#answer button:hover {
-    background-color: #218838;
-}
-#answer button:active {
-    background-color: #1e7e34;
-}
-
-#difficulty {
-    display: block;
-    margin: 20px auto;
-    padding: 10px;
-    font-size: 1.5em;
-    background-color: #f8f9fa;
-    color: #212529;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-}
-#difficulty:hover {
-    background-color: #e2e6ea;
-}
-
-#next-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 1.5em;
-    background-color: #17a2b8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#next-button:hover {
-    background-color: #138496;
-}
-#next-button:active {
-    background-color: #117a8b;
-}
-
-#correct-answer {
-    text-align: center;
-    font-size: 2em;
-    margin-top: 20px;
-}
-#correct-answer-value {
-    font-weight: bold;
-}
-#correct-answer svg {
-    display: block;
-    margin: 0 auto;
-}
-</style>
-
-
-<script>
-/**
- * 乱数を生成する関数
- * @param {number} min - 最小値
- * @param {number} max - 最大値
- * @returns {number} - 生成された乱数
- */
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function changeNumber() {
-    const qNumber = document.getElementById('q-number');
-    qNumber.textContent = getRandomInt(1, 255);
-}
-
-function calcCorrectAnswer() {
-    const qNumber = document.getElementById('q-number').textContent;
-    const intNum = parseInt(qNumber, 10);
-    const index = parseInt(document.getElementById('difficulty').value, 10);
-    return (intNum >> (index - 1)) & 1;
-}
-
-/**
- * 初期設定
- */
-document.addEventListener('DOMContentLoaded', function() {
-    const difficulty = localStorage.getItem('difficulty');
-    if (difficulty) {
-        document.getElementById('difficulty').value = difficulty;
-    }
-});
-
-/**
- * スタート
- */
-document.getElementById('start-button').addEventListener('click', function() {
-    localStorage.setItem('difficulty', document.getElementById('difficulty').value);
-    document.getElementById('start-button').style.display = 'none';
-    document.getElementById('difficulty').style.display = 'none';
-    document.getElementById('answer').style.display = 'flex';
-
-    changeNumber();
-});
-
-/**
- * 答え選択
- */
-document.addEventListener('click', function(e) {
-    if (!e.target.classList.contains('ans')) return;
-    const selectedAnswer = e.target.textContent;
-    const correctAnswer = calcCorrectAnswer();
-    document.getElementById('answer').style.display = 'none';
-    document.getElementById('next-button').style.display = 'block';
-    document.getElementById('correct-answer').style.display = 'block';
-    document.getElementById('correct-answer-value').textContent = correctAnswer;
-    console.log('Selected Answer:', selectedAnswer);
-    console.log('Correct Answer:', correctAnswer);
-    if (selectedAnswer == correctAnswer) {
-        document.getElementById('ans-o').style.display = 'inline-block';
-    } else {
-        document.getElementById('ans-x').style.display = 'inline-block';
-    }
-});
-
-/**
- * 次の問題
- */
-document.getElementById('next-button').addEventListener('click', function() {
-    document.getElementById('next-button').style.display = 'none';
-    document.getElementById('correct-answer').style.display = 'none';
-    document.getElementById('answer').style.display = 'flex';
-    document.getElementById('ans-o').style.display = 'none';
-    document.getElementById('ans-x').style.display = 'none';
-
-    changeNumber();
-});
-
-/**
- * キー操作
- */
-document.addEventListener('keydown', event => {
-    if (event.code === 'Digit1') {
-        document.querySelectorAll('.ans')[0].click();
-    }
-    if (event.code === 'Digit2') {
-        document.querySelectorAll('.ans')[1].click();
-    }
-    if (event.code === 'Space') {
-        const startButton = document.getElementById('start-button');
-        const nextButton = document.getElementById('next-button');
-        
-        event.preventDefault();
-        if (startButton.style.display !== 'none') {
-            startButton.click();
-        } else if (nextButton.style.display !== 'none') {
-            nextButton.click();
-        }
-
-        console.log('Space key pressed');
-    }
-});
-</script>
