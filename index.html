@@ -174,7 +174,7 @@ document.getElementById('start-button').addEventListener('click', function() {
     localStorage.setItem('difficulty', document.getElementById('difficulty').value);
     document.getElementById('start-button').style.display = 'none';
     document.getElementById('difficulty').style.display = 'none';
-    document.getElementById('answer').style.display = 'grid';
+    document.getElementById('answer').style.display = 'flex';
 
     changeNumber();
 });
@@ -185,10 +185,18 @@ document.getElementById('start-button').addEventListener('click', function() {
 document.querySelectorAll('.ans').forEach((button, index) => {
     button.addEventListener('click', function() {
         const selectedAnswer = this.textContent;
+        const correctAnswer = calcCorrectAnswer();
         document.getElementById('answer').style.display = 'none';
         document.getElementById('next-button').style.display = 'block';
         document.getElementById('correct-answer').style.display = 'block';
-        document.getElementById('correct-answer-value').textContent = calcCorrectAnswer();
+        document.getElementById('correct-answer-value').textContent = correctAnswer;
+        if (selectedAnswer == correctAnswer) {
+            document.getElementById('correct-answer').innerHTML = '
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="red" /></svg>';
+            
+        } else {
+            document.getElementById('correct-answer').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><line x1="10" y1="10" x2="90" y2="90" stroke="blue" stroke-width="10" /><line x1="90" y1="10" x2="10" y2="90" stroke="blue" stroke-width="10" /></svg>';
+        }
     });
 });
 
