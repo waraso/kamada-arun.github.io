@@ -194,6 +194,17 @@ document.querySelectorAll('.ans').forEach((button, index) => {
 });
 
 /**
+ * 次の問題
+ */
+document.getElementById('next-button').addEventListener('click', function() {
+    document.getElementById('next-button').style.display = 'none';
+    document.getElementById('correct-answer').style.display = 'none';
+    document.getElementById('answer').style.display = 'block';
+
+    changeNumber();
+});
+
+/**
  * キー操作
  */
 document.addEventListener('keydown', event => {
