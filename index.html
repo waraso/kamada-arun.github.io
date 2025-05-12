@@ -155,12 +155,14 @@ document.getElementById('start-button').addEventListener('click', function() {
 /**
  * 答え選択
  */
-document.querySelector('.ans').addEventListener('click', function() {
-    const selectedAnswer = this.textContent;
-    document.getElementById('answer').style.display = 'none';
-    document.getElementById('next-button').style.display = 'block';
-    document.getElementById('correct-answer').style.display = 'block';
-    document.getElementById('correct-answer-value').textContent = calcCorrectAnswer();
+document.querySelectorAll('.ans').forEach((button, index) => {
+    button.addEventListener('click', function() {
+        const selectedAnswer = this.textContent;
+        document.getElementById('answer').style.display = 'none';
+        document.getElementById('next-button').style.display = 'block';
+        document.getElementById('correct-answer').style.display = 'block';
+        document.getElementById('correct-answer-value').textContent = calcCorrectAnswer();
+    });
 });
 
 /**
