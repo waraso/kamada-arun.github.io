@@ -127,7 +127,6 @@ body {
 }
 #correct-answer-value {
     font-weight: bold;
-    color: #28a745;
 }
 </style>
 
@@ -175,7 +174,7 @@ document.getElementById('start-button').addEventListener('click', function() {
     localStorage.setItem('difficulty', document.getElementById('difficulty').value);
     document.getElementById('start-button').style.display = 'none';
     document.getElementById('difficulty').style.display = 'none';
-    document.getElementById('answer').style.display = 'block';
+    document.getElementById('answer').style.display = 'grid';
 
     changeNumber();
 });
