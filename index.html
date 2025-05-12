@@ -181,22 +181,21 @@ document.getElementById('start-button').addEventListener('click', function() {
 /**
  * 答え選択
  */
-document.querySelectorAll('.ans').forEach((button, index) => {
-    button.addEventListener('click', function() {
-        const selectedAnswer = this.textContent;
-        const correctAnswer = calcCorrectAnswer();
-        document.getElementById('answer').style.display = 'none';
-        document.getElementById('next-button').style.display = 'block';
-        document.getElementById('correct-answer').style.display = 'block';
-        document.getElementById('correct-answer-value').textContent = correctAnswer;
-        console.log('Selected Answer:', selectedAnswer);
-        console.log('Correct Answer:', correctAnswer);
-        if (selectedAnswer == correctAnswer) {
-            document.getElementById('correct-answer').innerHTML = '<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="#FF0000" stroke-width="20"/></svg>';
-        } else {
-            document.getElementById('correct-answer').innerHTML = '<svg width="202" height="201" viewBox="0 0 202 201" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="194.071" y1="7.07107" x2="8.07106" y2="193.071" stroke="#0000FF" stroke-width="20"/><line y1="-10" x2="263.044" y2="-10" transform="matrix(0.707107 0.707107 0.707107 -0.707107 15 0)" stroke="#0000FF" stroke-width="20"/></svg>';
-        }
-    });
+document.ddEventListener('click', function(e) {
+    if (!e.target.classList.contains('ans')) return;
+    const selectedAnswer = this.textContent;
+    const correctAnswer = calcCorrectAnswer();
+    document.getElementById('answer').style.display = 'none';
+    document.getElementById('next-button').style.display = 'block';
+    document.getElementById('correct-answer').style.display = 'block';
+    document.getElementById('correct-answer-value').textContent = correctAnswer;
+    console.log('Selected Answer:', selectedAnswer);
+    console.log('Correct Answer:', correctAnswer);
+    if (selectedAnswer == correctAnswer) {
+        document.getElementById('correct-answer').innerHTML = '<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="#FF0000" stroke-width="20"/></svg>';
+    } else {
+        document.getElementById('correct-answer').innerHTML = '<svg width="202" height="201" viewBox="0 0 202 201" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="194.071" y1="7.07107" x2="8.07106" y2="193.071" stroke="#0000FF" stroke-width="20"/><line y1="-10" x2="263.044" y2="-10" transform="matrix(0.707107 0.707107 0.707107 -0.707107 15 0)" stroke="#0000FF" stroke-width="20"/></svg>';
+    }
 });
 
 /**
