@@ -14,7 +14,6 @@
         <span id='correct-answer-value'>-</span>
     </div>
     <button id='start-button'>Start</button>
-    // プルダウンで1-7を選択
     <select id="difficulty">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -23,6 +22,7 @@
         <option value="5">5</option>
         <option value="6">6</option>
         <option value="7">7</option>
+        <option value="8">8</option>
     </select>
     <div id="answer" style="display: none;">
         <button class="ans-0">0</button>
@@ -115,7 +115,17 @@ function calcCorrectAnswer(index, ) {
     if ()
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    const difficulty = localStorage.getItem('difficulty');
+    if (difficulty) {
+        document.getElementById('difficulty').value = difficulty;
+    } else {
+        localStorage.setItem('difficulty', 1);
+    }
+});
+
 document.getElementById('start-button').addEventListener('click', function() {
+    localStorage.setItem('difficulty', document.getElementById('difficulty').value);
     const startButton = document.getElementById('start-button');
     startButton.style.display = 'none';
 
