@@ -119,8 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const difficulty = localStorage.getItem('difficulty');
     if (difficulty) {
         document.getElementById('difficulty').value = difficulty;
-    } else {
-        localStorage.setItem('difficulty', 1);
     }
 });
 
