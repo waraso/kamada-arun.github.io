@@ -25,10 +25,10 @@
         <option value="8">8</option>
     </select>
     <div id="answer" style="display: none;">
-        <button class="ans-0">0</button>
-        <button class="ans-1">1</button>
+        <button class="ans">0</button>
+        <button class="ans">1</button>
     </div>
-    <button class="next-button" style="display: none;">Next</button>
+    <button id="next-button" style="display: none;">Next</button>
 </body>
 </html>
 
@@ -109,9 +109,10 @@ function changeNumber() {
     qNumber.textContent = getRandomInt(1, 255);
 }
 
-function calcCorrectAnswer(index) {
+function calcCorrectAnswer() {
     const qNumber = document.getElementById('q-number').textContent;
     const intNum = parseInt(qNumber, 10);
+    const index = parseInt(document.getElementById('difficulty').value, 10);
     return (intNum >> (index - 1)) & 1;
 }
 
@@ -130,25 +131,31 @@ document.getElementById('start-button').addEventListener('click', function() {
     changeNumber();
 });
 
-document.querySelector('.ans-0').addEventListener('click', function() {
-    console.log('Answer 0 clicked');
+document.querySelector('.ans').addEventListener('click', function() {
+    const selectedAnswer = this.textContent;
+    console.log('Answer clicked');
     document.getElementById('correct-answer').style.display = 'block';
     document.getElementById('correct-answer-value').textContent = '0';
 });
 
-document.querySelector('.ans-1').addEventListener('click', function() {
-    console.log('Answer 1 clicked');
-});
-
 document.addEventListener('keydown', event => {
     if (event.code === 'Digit1') {
-        document.querySelector('.ans-0').click();
+        document.querySelectorAll('.ans')[0].click();
     }
     if (event.code === 'Digit2') {
-        document.querySelector('.ans-1').click();
+        document.querySelectorAll('.ans')[1].click();
     }
     if (event.code === 'Space') {
+        const startButton = document.getElementById('start-button');
+        const nextButton = document.getElementById('next-button');
+        
         event.preventDefault();
+        if (startButton.style.display !== 'none') {
+            startButton.click();
+        } else if (nextButton.style.display !== 'none') {
+            nextButton.click();
+        }
+
         console.log('Space key pressed');
     }
 });
