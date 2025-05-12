@@ -181,7 +181,7 @@ document.getElementById('start-button').addEventListener('click', function() {
 /**
  * 答え選択
  */
-document.ddEventListener('click', function(e) {
+document.addEventListener('click', function(e) {
     if (!e.target.classList.contains('ans')) return;
     const selectedAnswer = this.textContent;
     const correctAnswer = calcCorrectAnswer();
