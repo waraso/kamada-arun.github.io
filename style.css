@@ -4,6 +4,7 @@
     --green-btn-color: #28a745;
     --blue-btn-color: #007BFF;
     --white-btn-color: #f8f9fa;
+    --gray-btn-color: #646464;
 
     --black-char-color: #212529;
     --white-char-color: #f8f9fa;
@@ -116,6 +117,27 @@ svg.selected-ans {
     display: block;
 }
 
+#reset-button {
+    display: block;
+    margin: 20px auto;
+    padding: 8px 20px;
+    font-size: 0.8em;
+    background-color: var(--gray-btn-color);
+    color: var(--white-char-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#results {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+#results span {
+    font-size: 1em;
+    margin: 0 10px;
+}
 
 
 .hidden {

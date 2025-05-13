@@ -31,6 +31,35 @@ function toFormattedBinary(num) {
 }
 
 /**
+ * 結果を更新する関数
+ */
+function updateResults() {
+    const correctAnswerCountEl = document.getElementById('q-cor-cnt');
+    const answerCountEl = document.getElementById('q-cnt');
+    const correctAnswerPercentEl = document.getElementById('q-cor-per');
+
+    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
+    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
+
+    correctAnswerCountEl.textContent = correctCount;
+    answerCountEl.textContent = answerCount;
+    const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
+    correctAnswerPercentEl.textContent = percent;
+}
+function incrementResultCount(isCorrect) {
+    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
+    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
+
+    if (isCorrect) {
+        correctCount++;
+    }
+    answerCount++;
+
+    localStorage.setItem('correctAnswerCount', correctCount);
+    localStorage.setItem('answerCount', answerCount);
+}
+
+/**
  * 初期設定
  */
 document.addEventListener('DOMContentLoaded', function() {
@@ -42,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (difficulty) {
         document.getElementById('difficulty').value = difficulty;
     }
+
+    updateResults();
 });
 
 /**
@@ -52,8 +83,10 @@ document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('start-button').classList.add('hidden');
     document.getElementById('difficulty').classList.add('hidden');
     document.getElementById('answer').classList.remove('hidden');
+    document.getElementById('reset-button').classList.add('hidden');
 
     changeNumber();
+    updateResults();
 });
 
 /**
@@ -71,14 +104,18 @@ document.addEventListener('click', function(e) {
     document.getElementById('correct-answer').classList.remove('hidden');
     if (selectedAnswer == correctAnswer) {
         document.getElementById('ans-o').classList.add('selected-ans');
+        incrementResultCount(true);
     } else {
         document.getElementById('ans-x').classList.add('selected-ans');
+        incrementResultCount(false);
     }
 
     // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
     const num = parseInt(document.getElementById('q-number').textContent, 10);
     const formattedBinary = toFormattedBinary(num);
     document.getElementById('binary').textContent = formattedBinary;
+
+    updateResults();
 });
 
 /**
@@ -117,4 +154,10 @@ document.addEventListener('keydown', event => {
 
         console.log('Space key pressed');
     }
+});
+
+document.getElementById('reset-button').addEventListener('click', function() {
+    localStorage.clear();
+    updateResults();
+    document.getElementById('reset-button').textContent = '削除しました';
 });
