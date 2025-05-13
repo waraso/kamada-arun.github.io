@@ -63,10 +63,6 @@ function incrementResultCount(isCorrect) {
  * 初期設定
  */
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('correct-answer').classList.add('hidden');
-    document.getElementById('next-button').classList.add('hidden');
-    document.getElementById('answer').classList.add('hidden');
-
     const difficulty = localStorage.getItem('difficulty');
     if (difficulty) {
         document.getElementById('difficulty').value = difficulty;
