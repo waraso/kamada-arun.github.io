@@ -59,6 +59,27 @@ function incrementResultCount(isCorrect) {
     localStorage.setItem('answerCount', answerCount);
 }
 
+let timerInterval = null;
+let startTime = null;
+
+function startTimer() {
+    const timerEl = document.getElementById('timer');
+    startTime = Date.now();
+    timerEl.textContent = '0.0秒';
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        const elapsed = (Date.now() - startTime) / 1000;
+        timerEl.textContent = elapsed.toFixed(1) + '秒';
+    }, 100);
+}
+
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
 /**
  * 初期設定
  */
@@ -83,6 +104,7 @@ document.getElementById('start-button').addEventListener('click', function() {
 
     changeNumber();
     updateResults();
+    startTimer();
 });
 
 /**
@@ -92,6 +114,8 @@ document.addEventListener('click', function(e) {
     if (!e.target.classList.contains('ans')) return;
     if (document.getElementById('ans-o').classList.contains('selected-ans')) return;
     if (document.getElementById('ans-x').classList.contains('selected-ans')) return;
+
+    stopTimer();
 
     const selectedAnswer = e.target.textContent;
     const correctAnswer = calcCorrectAnswer();
@@ -125,6 +149,7 @@ document.getElementById('next-button').addEventListener('click', function() {
     document.getElementById('ans-x').classList.remove('selected-ans');
 
     changeNumber();
+    startTimer();
 });
 
 /**
