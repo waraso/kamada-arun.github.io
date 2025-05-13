@@ -64,6 +64,7 @@ let startTime = null;
 
 function startTimer() {
     const timerEl = document.getElementById('timer');
+    timerEl.classList.add('working');
     startTime = Date.now();
     timerEl.textContent = '0.0秒';
     if (timerInterval) clearInterval(timerInterval);
@@ -74,6 +75,7 @@ function startTimer() {
 }
 
 function stopTimer() {
+    document.getElementById('timer').classList.remove('working');
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
@@ -100,6 +102,7 @@ document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('start-button').classList.add('hidden');
     document.getElementById('index').classList.add('hidden');
     document.getElementById('answer').classList.remove('hidden');
+    document.getElementById('timer').classList.remove('hidden');
     document.getElementById('reset-button').classList.add('hidden');
 
     changeNumber();
@@ -177,6 +180,9 @@ document.addEventListener('keydown', event => {
     }
 });
 
+/**
+ * ローカルストレージ リセット
+ */
 document.getElementById('reset-button').addEventListener('click', function() {
     localStorage.clear();
     updateResults();

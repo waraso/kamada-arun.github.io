@@ -8,6 +8,7 @@
 
     --black-char-color: #212529;
     --white-char-color: #f8f9fa;
+    --red-char-color: #ff0000;
 }
 
 body {
@@ -137,6 +138,10 @@ svg.selected-ans {
 #results span {
     font-size: 1em;
     margin: 0 10px;
+}
+
+#timer.working {
+    color: var(--red-char-color)
 }
 
 
