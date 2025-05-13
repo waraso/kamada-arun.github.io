@@ -27,6 +27,10 @@ function calcCorrectAnswer() {
  * 初期設定
  */
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('correct-answer').classList.add('hidden');
+    document.getElementById('next-button').classList.add('hidden');
+    document.getElementById('answer').classList.add('hidden');
+
     const difficulty = localStorage.getItem('difficulty');
     if (difficulty) {
         document.getElementById('difficulty').value = difficulty;
@@ -38,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 document.getElementById('start-button').addEventListener('click', function() {
     localStorage.setItem('difficulty', document.getElementById('difficulty').value);
-    document.getElementById('start-button').style.display = 'none';
-    document.getElementById('difficulty').style.display = 'none';
-    document.getElementById('answer').style.display = 'flex';
+    document.getElementById('start-button').classList.add('hidden');
+    document.getElementById('difficulty').classList.add('hidden');
+    document.getElementById('answer').classList.remove('hidden');
 
     changeNumber();
 });
@@ -52,14 +56,12 @@ document.addEventListener('click', function(e) {
     if (!e.target.classList.contains('ans')) return;
     if (document.getElementById('ans-o').classList.contains('selected-ans')) return;
     if (document.getElementById('ans-x').classList.contains('selected-ans')) return;
+
     const selectedAnswer = e.target.textContent;
     const correctAnswer = calcCorrectAnswer();
-    document.getElementById('answer').style.display = 'none';
-    document.getElementById('next-button').style.display = 'block';
-    document.getElementById('correct-answer').style.display = 'block';
-    document.getElementById('correct-answer-value').textContent = correctAnswer;
-    console.log('Selected Answer:', selectedAnswer);
-    console.log('Correct Answer:', correctAnswer);
+    document.getElementById('answer').classList.add('hidden');
+    document.getElementById('next-button').classList.remove('hidden');
+    document.getElementById('correct-answer').classList.remove('hidden');
     if (selectedAnswer == correctAnswer) {
         document.getElementById('ans-o').classList.add('selected-ans');
     } else {
@@ -71,9 +73,9 @@ document.addEventListener('click', function(e) {
  * 次の問題
  */
 document.getElementById('next-button').addEventListener('click', function() {
-    document.getElementById('next-button').style.display = 'none';
-    document.getElementById('correct-answer').style.display = 'none';
-    document.getElementById('answer').style.display = 'flex';
+    document.getElementById('next-button').classList.add('hidden');
+    document.getElementById('correct-answer').classList.add('hidden');
+    document.getElementById('answer').classList.remove('hidden');
     document.getElementById('ans-o').classList.remove('selected-ans');
     document.getElementById('ans-x').classList.remove('selected-ans');
 
@@ -95,9 +97,9 @@ document.addEventListener('keydown', event => {
         const nextButton = document.getElementById('next-button');
         
         event.preventDefault();
-        if (startButton.style.display !== 'none') {
+        if (!startButton.classList.contains('hidden')) {
             startButton.click();
-        } else if (nextButton.style.display !== 'none') {
+        } else if (!nextButton.classList.contains('hidden')) {
             nextButton.click();
         }
 

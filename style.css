@@ -45,6 +45,7 @@ body {
 }
 
 #answer {
+    display: flex;
     justify-content: center;
     margin-top: 20px;
 }
@@ -108,9 +109,15 @@ body {
 svg {
     position: relative;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -120%);
     display: none;
 }
 svg.selected-ans {
     display: block;
+}
+
+
+
+.hidden {
+    display: none !important;
 }
