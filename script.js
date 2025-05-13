@@ -67,6 +67,11 @@ document.addEventListener('click', function(e) {
     } else {
         document.getElementById('ans-x').classList.add('selected-ans');
     }
+
+    // 2進数に変換、4桁で空白区切り、8桁まで0埋め
+    const binary = parseInt(document.getElementById('q-number').textContent, 10).toString(2);
+    const formattedBinary = binary.padStart(8, '0').replace(/(.{4})/g, '$1 ').trim();
+    document.getElementById('binary').textContent = formattedBinary;
 });
 
 /**
