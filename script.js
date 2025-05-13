@@ -13,7 +13,7 @@ function getRandomInt(min, max) {
 
 function changeNumber() {
     const qNumber = document.getElementById('q-number');
-    qNumber.textContent = getRandomInt(1, 255);
+    qNumber.textContent = getRandomInt(0, 255);
 }
 
 function calcCorrectAnswer() {
@@ -21,6 +21,13 @@ function calcCorrectAnswer() {
     const intNum = parseInt(qNumber, 10);
     const index = parseInt(document.getElementById('difficulty').value, 10);
     return (intNum >> (index - 1)) & 1;
+}
+
+function toFormattedBinary(num) {
+    // >>> 0 は符号なし整数への変換、下位32bitを扱う
+    const binaryStr = (num >>> 0).toString(2).padStart(32, '0');
+    const last8Bits = binaryStr.slice(-8); // 常に下位8ビットを取る
+    return last8Bits.replace(/(.{4})/g, '$1 ').trim();
 }
 
 /**
@@ -68,9 +75,9 @@ document.addEventListener('click', function(e) {
         document.getElementById('ans-x').classList.add('selected-ans');
     }
 
-    // 2進数に変換、4桁で空白区切り、8桁まで0埋め
-    const binary = parseInt(document.getElementById('q-number').textContent, 10).toString(2);
-    const formattedBinary = binary.padStart(8, '0').replace(/(.{4})/g, '$1 ').trim();
+    // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
+    const num = parseInt(document.getElementById('q-number').textContent, 10);
+    const formattedBinary = toFormattedBinary(num);
     document.getElementById('binary').textContent = formattedBinary;
 });
 
