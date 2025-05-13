@@ -19,7 +19,7 @@ function changeNumber() {
 function calcCorrectAnswer() {
     const qNumber = document.getElementById('q-number').textContent;
     const intNum = parseInt(qNumber, 10);
-    const index = parseInt(document.getElementById('difficulty').value, 10);
+    const index = parseInt(document.getElementById('index').value, 10);
     return (intNum >> (index - 1)) & 1;
 }
 
@@ -84,9 +84,9 @@ function stopTimer() {
  * 初期設定
  */
 document.addEventListener('DOMContentLoaded', function() {
-    const difficulty = localStorage.getItem('difficulty');
-    if (difficulty) {
-        document.getElementById('difficulty').value = difficulty;
+    const index = localStorage.getItem('index');
+    if (index) {
+        document.getElementById('index').value = index;
     }
 
     updateResults();
@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
  * スタート
  */
 document.getElementById('start-button').addEventListener('click', function() {
-    localStorage.setItem('difficulty', document.getElementById('difficulty').value);
+    localStorage.setItem('index', document.getElementById('index').value);
     document.getElementById('start-button').classList.add('hidden');
-    document.getElementById('difficulty').classList.add('hidden');
+    document.getElementById('index').classList.add('hidden');
     document.getElementById('answer').classList.remove('hidden');
     document.getElementById('reset-button').classList.add('hidden');
 

@@ -67,7 +67,7 @@ body {
     background-color: color-mix(in srgb, var(--blue-btn-color), black 30%);
 }
 
-#difficulty {
+#index {
     display: block;
     margin: 20px auto;
     padding: 10px;
@@ -77,7 +77,7 @@ body {
     border: 1px solid color-mix(in srgb, var(--white-btn-color), black 20%);
     border-radius: 5px;
 }
-#difficulty:hover {
+#index:hover {
     background-color: color-mix(in srgb, var(--white-btn-color), black 10%);
 }
 
