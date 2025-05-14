@@ -42,6 +42,12 @@ function toFormattedBinary(num) {
  */
 function updateResults() {
     const correctAnswerCountEl = document.getElementById('q-cor-cnt');
+    const answerCountEl = document.getElementById('q-cnt');
+    const correctAnswerPercentEl = document.getElementById('q-cor-per');
+
+    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
+    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
+
     correctAnswerCountEl.textContent = correctCount;
     answerCountEl.textContent = answerCount;
     const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
@@ -107,8 +113,8 @@ document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('reset-button').classList.add('hidden');
 
     changeNumber();
-    updateResults();
     startTimer();
+    updateResults();
 });
 
 /**
