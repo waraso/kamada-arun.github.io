@@ -11,13 +11,24 @@
     --red-char-color: #ff7878;
 }
 
+.rampart-one-regular {
+  font-family: "Rampart One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 body {
     background-color: var(--main-bg-color);
     color: var(--white-char-color);
+    font-family: "Noto Sans JP", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .title {
-    font-size: 3em;
+    font-size: 2em;
     text-align: center;
     margin-top: 20px;
 }
