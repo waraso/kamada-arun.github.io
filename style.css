@@ -11,6 +11,11 @@
     --red-char-color: #ff7878;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     background-color: var(--main-bg-color);
     color: var(--white-char-color);
