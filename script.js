@@ -160,9 +160,11 @@ document.getElementById('next-button').addEventListener('click', function() {
  */
 document.addEventListener('keydown', event => {
     if (event.code === 'Digit1') {
+        if (document.querySelector('#answer').classList.contains('hidden')) return;
         document.querySelectorAll('.ans')[0].click();
     }
     if (event.code === 'Digit2') {
+        if (document.querySelector('#answer').classList.contains('hidden')) return;
         document.querySelectorAll('.ans')[1].click();
     }
     if (event.code === 'Space') {
@@ -175,8 +177,6 @@ document.addEventListener('keydown', event => {
         } else if (!nextButton.classList.contains('hidden')) {
             nextButton.click();
         }
-
-        console.log('Space key pressed');
     }
 });
 
