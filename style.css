@@ -26,6 +26,18 @@ body {
     text-align: center;
     margin-top: 20px;
 }
+@media screen and (max-width: 750px) {
+    .title {
+        font-size: 2em;
+    }
+    
+}
+@media screen and (max-width: 500px) {
+    .title {
+        font-size: 1.5em;
+    }
+    
+}
 
 #q-number {
     font-size: 5em;
@@ -144,6 +156,13 @@ svg.selected-ans {
 #results span {
     font-size: 1em;
     margin: 0 10px;
+}
+@media screen and (max-width: 350px) {
+    #results span {
+        font-size: 0.8em;
+        margin: 0 5px;
+    }
+    
 }
 
 #timer {
