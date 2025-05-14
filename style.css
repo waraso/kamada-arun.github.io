@@ -17,6 +17,10 @@
   font-style: normal;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+}
 
 body {
     background-color: var(--main-bg-color);
@@ -31,6 +35,18 @@ body {
     font-size: 2em;
     text-align: center;
     margin-top: 20px;
+}
+@media screen and (max-width: 750px) {
+    .title {
+        font-size: 2em;
+    }
+    
+}
+@media screen and (max-width: 500px) {
+    .title {
+        font-size: 1.5em;
+    }
+    
 }
 
 #q-number {
@@ -150,6 +166,13 @@ svg.selected-ans {
 #results span {
     font-size: 1em;
     margin: 0 10px;
+}
+@media screen and (max-width: 350px) {
+    #results span {
+        font-size: 0.8em;
+        margin: 0 5px;
+    }
+    
 }
 
 #timer {
