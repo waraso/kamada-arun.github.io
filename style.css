@@ -25,7 +25,7 @@ body {
 #q-number {
     font-size: 5em;
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 #start-button {
@@ -109,9 +109,10 @@ body {
     font-weight: bold;
 }
 svg {
-    position: relative;
+    position: absolute;
     left: 50%;
-    transform: translate(-50%, -120%);
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: none;
 }
 svg.selected-ans {
