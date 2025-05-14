@@ -140,8 +140,13 @@ svg.selected-ans {
     margin: 0 10px;
 }
 
+#timer {
+    font-size:1.5em;
+    text-align:center;
+    color: var(--red-char-color);
+}
 #timer.working {
-    color: var(--red-char-color)
+    color: var(--white-char-color)
 }
 
 
