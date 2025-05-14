@@ -27,7 +27,14 @@ function toFormattedBinary(num) {
     // >>> 0 は符号なし整数への変換、下位32bitを扱う
     const binaryStr = (num >>> 0).toString(2).padStart(32, '0');
     const last8Bits = binaryStr.slice(-8); // 常に下位8ビットを取る
-    return last8Bits.replace(/(.{4})/g, '$1 ').trim();
+    // 4桁区切りの文字列
+    const formattedBinary = last8Bits.replace(/(.{4})/g, '$1 ').trim();
+    // index取得（localStorageは文字列なのでNumberに変換）
+    const index = Number(localStorage.getItem('index'));
+    // ハイライト処理
+    return [...formattedBinary].map((c, i) =>
+        i === 9 - index ? `<span class="highlight">${c}</span>` : c
+    ).join('');
 }
 
 /**
@@ -35,12 +42,6 @@ function toFormattedBinary(num) {
  */
 function updateResults() {
     const correctAnswerCountEl = document.getElementById('q-cor-cnt');
-    const answerCountEl = document.getElementById('q-cnt');
-    const correctAnswerPercentEl = document.getElementById('q-cor-per');
-
-    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
-    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
-
     correctAnswerCountEl.textContent = correctCount;
     answerCountEl.textContent = answerCount;
     const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
@@ -136,7 +137,7 @@ document.addEventListener('click', function(e) {
     // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
     const num = parseInt(document.getElementById('q-number').textContent, 10);
     const formattedBinary = toFormattedBinary(num);
-    document.getElementById('binary').textContent = formattedBinary;
+    document.getElementById('binary').innerHTML = formattedBinary;
 
     updateResults();
 });

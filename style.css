@@ -8,7 +8,7 @@
 
     --black-char-color: #212529;
     --white-char-color: #f8f9fa;
-    --red-char-color: #ff0000;
+    --red-char-color: #ff7878;
 }
 
 body {
@@ -147,6 +147,10 @@ svg.selected-ans {
 }
 #timer.working {
     color: var(--white-char-color)
+}
+
+#binary .highlight {
+    color: var(--red-char-color);
 }
 
 
