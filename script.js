@@ -111,6 +111,7 @@ function backToStart() {
     document.getElementById('correct-answer').classList.add('hidden');
     document.getElementById('ans-o').classList.remove('selected-ans');
     document.getElementById('ans-x').classList.remove('selected-ans');
+    document.getElementById('back-btn').classList.add('hidden');
     document.getElementById('q-number').textContent = '0';
 
     stopTimer();
@@ -167,6 +168,7 @@ document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('answer').classList.remove('hidden');
     document.getElementById('timer').classList.remove('hidden');
     document.getElementById('reset-button').classList.add('hidden');
+    document.getElementById('back-btn').classList.remove('hidden');
     document.getElementById('reset-button').textContent = '保存したデータを全て削除する';
 
     changeNumber();
@@ -202,7 +204,7 @@ document.getElementById('next-button').addEventListener('click', function() {
 /**
  * 終了
  */
-document.querySelector('.back-btn').addEventListener('click', backToStart);
+document.getElementById('back-btn').addEventListener('click', backToStart);
 
 /**
  * キー操作
@@ -228,7 +230,7 @@ document.addEventListener('keydown', event => {
         }
     }
     if (event.code === 'Escape') {
-        const backButton = document.querySelector('.back-btn');
+        const backButton = document.getElementById('back-btn');
         if (!backButton.classList.contains('hidden')) {
             backToStart();
         }
