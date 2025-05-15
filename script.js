@@ -32,8 +32,9 @@ function toFormattedBinary(num) {
     // index取得（localStorageは文字列なのでNumberに変換）
     const index = Number(localStorage.getItem('index'));
     // ハイライト処理
+    const highlightIdx = index <= 4 ? 9 - index : 8 - index;
     return [...formattedBinary].map((c, i) =>
-        i === 9 - index ? `<span class="highlight">${c}</span>` : c
+        i === highlightIdx ? `<span class="highlight">${c}</span>` : c
     ).join('');
 }
 
