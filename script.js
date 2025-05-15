@@ -42,34 +42,19 @@ function toFormattedBinary(num) {
  * 結果を更新する関数
  */
 function updateResults() {
-    const correctAnswerCountEl = document.getElementById('q-cor-cnt');
-    const answerCountEl = document.getElementById('q-cnt');
-    const correctAnswerPercentEl = document.getElementById('q-cor-per');
+    const logs = JSON.parse(localStorage.getItem('logs')) || [];
+    
+    const correctCount = logs.filter(log => log.isCorrect).length;
+    const answerCount = logs.length;
 
-    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
-    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
-
-    correctAnswerCountEl.textContent = correctCount;
-    answerCountEl.textContent = answerCount;
+    document.getElementById('q-cor-cnt').textContent = correctCount;
+    document.getElementById('q-cnt').textContent = answerCount;
     const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
-    correctAnswerPercentEl.textContent = percent;
-}
-function incrementResultCount(isCorrect) {
-    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
-    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
-
-    if (isCorrect) {
-        correctCount++;
-    }
-    answerCount++;
-
-    localStorage.setItem('correctAnswerCount', correctCount);
-    localStorage.setItem('answerCount', answerCount);
+    document.getElementById('q-cor-per').textContent = percent;
 }
 
 let timerInterval = null;
 let startTime = null;
-
 function startTimer() {
     const timerEl = document.getElementById('timer');
     timerEl.classList.add('working');
@@ -81,7 +66,20 @@ function startTimer() {
         timerEl.textContent = elapsed.toFixed(1) + '秒';
     }, 100);
 }
+function stopTimer() {
+    document.getElementById('timer').classList.remove('working');
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
 
+/**
+ * ログを保存する関数
+ * @param {string} time - 経過時間
+ * @param {string} question - 問題番号
+ * @param {string} answer - 選択した答え
+ */
 function saveLogs(time, question, answer) {
     const isCorrect = calcCorrectAnswer(question) == answer;
     const date = new Date();
@@ -91,14 +89,6 @@ function saveLogs(time, question, answer) {
     const logs = JSON.parse(localStorage.getItem('logs')) || [];
     logs.push({ date, time, question, answer, isCorrect });
     localStorage.setItem('logs', JSON.stringify(logs));
-}
-
-function stopTimer() {
-    document.getElementById('timer').classList.remove('working');
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
 }
 
 function backToStart() {
@@ -127,10 +117,8 @@ function clickAnswer(selectedAnswer) {
     document.getElementById('correct-answer').classList.remove('hidden');
     if (selectedAnswer == correctAnswer) {
         document.getElementById('ans-o').classList.add('selected-ans');
-        incrementResultCount(true);
     } else {
         document.getElementById('ans-x').classList.add('selected-ans');
-        incrementResultCount(false);
     }
 
     // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
