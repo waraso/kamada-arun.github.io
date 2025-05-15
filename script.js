@@ -151,6 +151,7 @@ document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('answer').classList.remove('hidden');
     document.getElementById('timer').classList.remove('hidden');
     document.getElementById('reset-button').classList.add('hidden');
+    document.getElementById('reset-button').textContent = '保存したデータを全て削除する';
 
     changeNumber();
     startTimer();
