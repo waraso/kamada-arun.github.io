@@ -90,6 +90,45 @@ function stopTimer() {
     }
 }
 
+function backToStart() {
+    document.getElementById('start-button').classList.remove('hidden');
+    document.getElementById('index').classList.remove('hidden');
+    document.getElementById('answer').classList.add('hidden');
+    document.getElementById('timer').classList.add('hidden');
+    document.getElementById('reset-button').classList.remove('hidden');
+    document.getElementById('next-button').classList.add('hidden');
+    document.getElementById('correct-answer').classList.add('hidden');
+    document.getElementById('ans-o').classList.remove('selected-ans');
+    document.getElementById('ans-x').classList.remove('selected-ans');
+    document.getElementById('q-number').textContent = '0';
+
+    stopTimer();
+}
+
+function clickAnswer(selectedAnswer) {
+
+    stopTimer();
+
+    const correctAnswer = calcCorrectAnswer();
+    document.getElementById('answer').classList.add('hidden');
+    document.getElementById('next-button').classList.remove('hidden');
+    document.getElementById('correct-answer').classList.remove('hidden');
+    if (selectedAnswer == correctAnswer) {
+        document.getElementById('ans-o').classList.add('selected-ans');
+        incrementResultCount(true);
+    } else {
+        document.getElementById('ans-x').classList.add('selected-ans');
+        incrementResultCount(false);
+    }
+
+    // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
+    const num = parseInt(document.getElementById('q-number').textContent, 10);
+    const formattedBinary = toFormattedBinary(num);
+    document.getElementById('binary').innerHTML = formattedBinary;
+
+    updateResults();
+}
+
 /**
  * 初期設定
  */
@@ -121,32 +160,12 @@ document.getElementById('start-button').addEventListener('click', function() {
 /**
  * 答え選択
  */
-document.addEventListener('click', function(e) {
+document.addEventListener('mousedown', function(e) {
     if (!e.target.classList.contains('ans')) return;
     if (document.getElementById('ans-o').classList.contains('selected-ans')) return;
     if (document.getElementById('ans-x').classList.contains('selected-ans')) return;
 
-    stopTimer();
-
-    const selectedAnswer = e.target.textContent;
-    const correctAnswer = calcCorrectAnswer();
-    document.getElementById('answer').classList.add('hidden');
-    document.getElementById('next-button').classList.remove('hidden');
-    document.getElementById('correct-answer').classList.remove('hidden');
-    if (selectedAnswer == correctAnswer) {
-        document.getElementById('ans-o').classList.add('selected-ans');
-        incrementResultCount(true);
-    } else {
-        document.getElementById('ans-x').classList.add('selected-ans');
-        incrementResultCount(false);
-    }
-
-    // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
-    const num = parseInt(document.getElementById('q-number').textContent, 10);
-    const formattedBinary = toFormattedBinary(num);
-    document.getElementById('binary').innerHTML = formattedBinary;
-
-    updateResults();
+    clickAnswer(e.textContent);
 });
 
 /**
@@ -164,16 +183,21 @@ document.getElementById('next-button').addEventListener('click', function() {
 });
 
 /**
+ * 終了
+ */
+document.querySelector('.back-btn').addEventListener('click', backToStart);
+
+/**
  * キー操作
  */
 document.addEventListener('keydown', event => {
     if (event.code === 'Digit1') {
         if (document.querySelector('#answer').classList.contains('hidden')) return;
-        document.querySelectorAll('.ans')[0].click();
+        clickAnswer(0);
     }
     if (event.code === 'Digit2') {
         if (document.querySelector('#answer').classList.contains('hidden')) return;
-        document.querySelectorAll('.ans')[1].click();
+        clickAnswer(1);
     }
     if (event.code === 'Space') {
         const startButton = document.getElementById('start-button');
@@ -184,6 +208,12 @@ document.addEventListener('keydown', event => {
             startButton.click();
         } else if (!nextButton.classList.contains('hidden')) {
             nextButton.click();
+        }
+    }
+    if (event.code === 'Escape') {
+        const backButton = document.querySelector('.back-btn');
+        if (!backButton.classList.contains('hidden')) {
+            backToStart();
         }
     }
 });

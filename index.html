@@ -12,7 +12,14 @@
     <link rel='stylesheet' href='style.css'>
 </head>
 <body>
-    <h1 class='title'>Binary Battle Practice Tool v2</h1>
+    <header>
+        <svg class="back-btn"  width="90" height="76" viewBox="0 0 90 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="34" y="25" width="56" height="26" fill="white"/>
+            <path d="M2.15366e-06 38L34.5 5.09103L34.5 70.909L2.15366e-06 38Z" fill="white"/>
+        </svg>
+        <h1 class='title'>Binary Battle Practice Tool v2</h1>
+    </header>
+
     <div id="results">
         <span>
             <span id="q-cor-cnt">-</span>問正解
@@ -27,9 +34,9 @@
     <div style="position: relative;">
         <p id='q-number' class="rampart-one-regular">0</p>
         <!-- O -->
-        <svg id="ans-o" width="100" height="100" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="#FF0000" stroke-width="20"/></svg>
+        <svg id="ans-o" class="ans-svg" width="100" height="100" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" stroke="#FF0000" stroke-width="20"/></svg>
         <!-- X -->
-        <svg id="ans-x" width="100" height="100" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="194.071" y1="7.07107" x2="8.07106" y2="193.071" stroke="#0000FF" stroke-width="20"/><line y1="-10" x2="263.044" y2="-10" transform="matrix(0.707107 0.707107 0.707107 -0.707107 15 0)" stroke="#0000FF" stroke-width="20"/></svg>
+        <svg id="ans-x" class="ans-svg" width="100" height="100" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="194.071" y1="7.07107" x2="8.07106" y2="193.071" stroke="#0000FF" stroke-width="20"/><line y1="-10" x2="263.044" y2="-10" transform="matrix(0.707107 0.707107 0.707107 -0.707107 15 0)" stroke="#0000FF" stroke-width="20"/></svg>
     </div>
     <div id="timer" class="hidden">0.0秒</div>
     <div id='correct-answer' class="hidden">
