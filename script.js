@@ -16,11 +16,11 @@ function changeNumber() {
     qNumber.textContent = getRandomInt(0, 255);
 }
 
-function calcCorrectAnswer() {
-    const qNumber = document.getElementById('q-number').textContent;
-    const intNum = parseInt(qNumber, 10);
-    const index = parseInt(document.getElementById('index').value, 10);
-    return (intNum >> (index - 1)) & 1;
+function calcCorrectAnswer(
+    qNumber = parseInt(document.getElementById('q-number').textContent, 10),
+    index = parseInt(document.getElementById('index').value, 10)
+) {
+    return (qNumber >> (index - 1)) & 1;
 }
 
 function toFormattedBinary(num) {
@@ -82,6 +82,17 @@ function startTimer() {
     }, 100);
 }
 
+function saveLogs(time, question, answer) {
+    const isCorrect = calcCorrectAnswer(question) == answer;
+    const date = new Date();
+    time = parseFloat(time.slice(0, -1));
+    question = parseInt(question, 10);
+
+    const logs = JSON.parse(localStorage.getItem('logs')) || [];
+    logs.push({ date, time, question, answer, isCorrect });
+    localStorage.setItem('logs', JSON.stringify(logs));
+}
+
 function stopTimer() {
     document.getElementById('timer').classList.remove('working');
     if (timerInterval) {
@@ -126,6 +137,11 @@ function clickAnswer(selectedAnswer) {
     const formattedBinary = toFormattedBinary(num);
     document.getElementById('binary').innerHTML = formattedBinary;
 
+    saveLogs(
+        document.getElementById('timer').textContent,
+        document.getElementById('q-number').textContent,
+        selectedAnswer
+    );
     updateResults();
 }
 
