@@ -226,6 +226,20 @@ document.addEventListener('keydown', event => {
 });
 
 /**
+ * ダブルタップでのズーム防止
+ */
+{
+    let lastTouchTime = 0;
+    document.addEventListener('touchend', function (e) {
+        const now = new Date().getTime();
+        if (now - lastTouchTime <= 300) {
+            e.preventDefault();
+        }
+        lastTouchTime = now;
+    });
+}
+
+/**
  * ローカルストレージ リセット
  */
 document.getElementById('reset-button').addEventListener('click', function() {
