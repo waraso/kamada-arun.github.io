@@ -74,6 +74,10 @@ header {
     margin: 20px 0;
 }
 
+button, input, select {
+    user-select: none;
+}
+
 #start-button {
     display: block;
     margin: 0 auto;
