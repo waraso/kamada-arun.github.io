@@ -50,7 +50,9 @@ header {
     top: 50%;
     /* left: 0; */
     transform: translate(0%, -50%);
+    cursor: pointer;
 }
+
 @media screen and (max-width: 780px) {
     .title {
         font-size: 2em;
