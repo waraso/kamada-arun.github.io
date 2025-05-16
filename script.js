@@ -172,7 +172,7 @@ document.addEventListener('mousedown', function(e) {
     if (document.getElementById('ans-o').classList.contains('selected-ans')) return;
     if (document.getElementById('ans-x').classList.contains('selected-ans')) return;
 
-    clickAnswer(e.textContent);
+    clickAnswer(e.target.textContent);
 });
 
 /**
