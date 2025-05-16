@@ -16,11 +16,11 @@ function changeNumber() {
     qNumber.textContent = getRandomInt(0, 255);
 }
 
-function calcCorrectAnswer() {
-    const qNumber = document.getElementById('q-number').textContent;
-    const intNum = parseInt(qNumber, 10);
-    const index = parseInt(document.getElementById('index').value, 10);
-    return (intNum >> (index - 1)) & 1;
+function calcCorrectAnswer(
+    qNumber = parseInt(document.getElementById('q-number').textContent, 10),
+    index = parseInt(document.getElementById('index').value, 10)
+) {
+    return (qNumber >> (index - 1)) & 1;
 }
 
 function toFormattedBinary(num) {
@@ -42,34 +42,19 @@ function toFormattedBinary(num) {
  * 結果を更新する関数
  */
 function updateResults() {
-    const correctAnswerCountEl = document.getElementById('q-cor-cnt');
-    const answerCountEl = document.getElementById('q-cnt');
-    const correctAnswerPercentEl = document.getElementById('q-cor-per');
+    const logs = JSON.parse(localStorage.getItem('logs')) || [];
+    
+    const correctCount = logs.filter(log => log.isCorrect).length;
+    const answerCount = logs.length;
 
-    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
-    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
-
-    correctAnswerCountEl.textContent = correctCount;
-    answerCountEl.textContent = answerCount;
+    document.getElementById('q-cor-cnt').textContent = correctCount;
+    document.getElementById('q-cnt').textContent = answerCount;
     const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
-    correctAnswerPercentEl.textContent = percent;
-}
-function incrementResultCount(isCorrect) {
-    let correctCount = parseInt(localStorage.getItem('correctAnswerCount') || '0', 10);
-    let answerCount = parseInt(localStorage.getItem('answerCount') || '0', 10);
-
-    if (isCorrect) {
-        correctCount++;
-    }
-    answerCount++;
-
-    localStorage.setItem('correctAnswerCount', correctCount);
-    localStorage.setItem('answerCount', answerCount);
+    document.getElementById('q-cor-per').textContent = percent;
 }
 
 let timerInterval = null;
 let startTime = null;
-
 function startTimer() {
     const timerEl = document.getElementById('timer');
     timerEl.classList.add('working');
@@ -81,13 +66,72 @@ function startTimer() {
         timerEl.textContent = elapsed.toFixed(1) + '秒';
     }, 100);
 }
-
 function stopTimer() {
     document.getElementById('timer').classList.remove('working');
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
     }
+}
+
+/**
+ * ログを保存する関数
+ * @param {string} time - 経過時間
+ * @param {string} question - 問題番号
+ * @param {string} answer - 選択した答え
+ */
+function saveLogs(time, question, answer) {
+    const isCorrect = calcCorrectAnswer(question) == answer;
+    const date = new Date();
+    time = parseFloat(time.slice(0, -1));
+    question = parseInt(question, 10);
+
+    const logs = JSON.parse(localStorage.getItem('logs')) || [];
+    logs.push({ date, time, question, answer, isCorrect });
+    localStorage.setItem('logs', JSON.stringify(logs));
+}
+
+function backToStart() {
+    document.getElementById('start-button').classList.remove('hidden');
+    document.getElementById('index').classList.remove('hidden');
+    document.getElementById('answer').classList.add('hidden');
+    document.getElementById('timer').classList.add('hidden');
+    document.getElementById('reset-button').classList.remove('hidden');
+    document.getElementById('next-button').classList.add('hidden');
+    document.getElementById('correct-answer').classList.add('hidden');
+    document.getElementById('ans-o').classList.remove('selected-ans');
+    document.getElementById('ans-x').classList.remove('selected-ans');
+    document.getElementById('back-btn').classList.add('hidden');
+    document.getElementById('q-number').textContent = '0';
+
+    stopTimer();
+}
+
+function clickAnswer(selectedAnswer) {
+
+    stopTimer();
+
+    const correctAnswer = calcCorrectAnswer();
+    document.getElementById('answer').classList.add('hidden');
+    document.getElementById('next-button').classList.remove('hidden');
+    document.getElementById('correct-answer').classList.remove('hidden');
+    if (selectedAnswer == correctAnswer) {
+        document.getElementById('ans-o').classList.add('selected-ans');
+    } else {
+        document.getElementById('ans-x').classList.add('selected-ans');
+    }
+
+    // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
+    const num = parseInt(document.getElementById('q-number').textContent, 10);
+    const formattedBinary = toFormattedBinary(num);
+    document.getElementById('binary').innerHTML = formattedBinary;
+
+    saveLogs(
+        document.getElementById('timer').textContent,
+        document.getElementById('q-number').textContent,
+        selectedAnswer
+    );
+    updateResults();
 }
 
 /**
@@ -112,6 +156,8 @@ document.getElementById('start-button').addEventListener('click', function() {
     document.getElementById('answer').classList.remove('hidden');
     document.getElementById('timer').classList.remove('hidden');
     document.getElementById('reset-button').classList.add('hidden');
+    document.getElementById('back-btn').classList.remove('hidden');
+    document.getElementById('reset-button').textContent = '保存したデータを全て削除する';
 
     changeNumber();
     startTimer();
@@ -121,32 +167,12 @@ document.getElementById('start-button').addEventListener('click', function() {
 /**
  * 答え選択
  */
-document.addEventListener('click', function(e) {
+document.addEventListener('mousedown', function(e) {
     if (!e.target.classList.contains('ans')) return;
     if (document.getElementById('ans-o').classList.contains('selected-ans')) return;
     if (document.getElementById('ans-x').classList.contains('selected-ans')) return;
 
-    stopTimer();
-
-    const selectedAnswer = e.target.textContent;
-    const correctAnswer = calcCorrectAnswer();
-    document.getElementById('answer').classList.add('hidden');
-    document.getElementById('next-button').classList.remove('hidden');
-    document.getElementById('correct-answer').classList.remove('hidden');
-    if (selectedAnswer == correctAnswer) {
-        document.getElementById('ans-o').classList.add('selected-ans');
-        incrementResultCount(true);
-    } else {
-        document.getElementById('ans-x').classList.add('selected-ans');
-        incrementResultCount(false);
-    }
-
-    // 2進数に変換、4桁で空白区切り、8桁まで0埋め、負の数も対応
-    const num = parseInt(document.getElementById('q-number').textContent, 10);
-    const formattedBinary = toFormattedBinary(num);
-    document.getElementById('binary').innerHTML = formattedBinary;
-
-    updateResults();
+    clickAnswer(e.target.textContent);
 });
 
 /**
@@ -164,16 +190,21 @@ document.getElementById('next-button').addEventListener('click', function() {
 });
 
 /**
+ * 終了
+ */
+document.getElementById('back-btn').addEventListener('click', backToStart);
+
+/**
  * キー操作
  */
 document.addEventListener('keydown', event => {
     if (event.code === 'Digit1') {
         if (document.querySelector('#answer').classList.contains('hidden')) return;
-        document.querySelectorAll('.ans')[0].click();
+        clickAnswer(0);
     }
     if (event.code === 'Digit2') {
         if (document.querySelector('#answer').classList.contains('hidden')) return;
-        document.querySelectorAll('.ans')[1].click();
+        clickAnswer(1);
     }
     if (event.code === 'Space') {
         const startButton = document.getElementById('start-button');
@@ -184,6 +215,12 @@ document.addEventListener('keydown', event => {
             startButton.click();
         } else if (!nextButton.classList.contains('hidden')) {
             nextButton.click();
+        }
+    }
+    if (event.code === 'Escape') {
+        const backButton = document.getElementById('back-btn');
+        if (!backButton.classList.contains('hidden')) {
+            backToStart();
         }
     }
 });
