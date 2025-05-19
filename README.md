@@ -16,3 +16,5 @@ Binary Battle Practice Tool v2
   - 「Esc」 やめる
 - Local storageにログが保存されています。
   - ログを取り出す機能は実装していないですが、F12のApplicationから見ることができます。
+- PWAを実装しているので、インストールするとアプリのように使えます。
+- Issueとかプルリク投げてくれたら対応します。
