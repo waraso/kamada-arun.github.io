@@ -29,6 +29,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    touch-action: manipulation;
 }
 
 header {
@@ -49,7 +50,9 @@ header {
     top: 50%;
     /* left: 0; */
     transform: translate(0%, -50%);
+    cursor: pointer;
 }
+
 @media screen and (max-width: 780px) {
     .title {
         font-size: 2em;
@@ -71,6 +74,10 @@ header {
     font-size: 5em;
     text-align: center;
     margin: 20px 0;
+}
+
+button, input, select {
+    user-select: none;
 }
 
 #start-button {

@@ -1,6 +1,6 @@
 {
   "name": "Binary Battle Practice Tool v2",
-  "short-name": "BBTP2",
+  "short_name": "BBTP2",
   "icons": [
     {
       "src": "./img/icon-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0A0F1C",
-  "theme_color": "#f8f9fa"
+  "background_color": "#f8f9fa",
+  "theme_color": "#0A0F1C"
 }
