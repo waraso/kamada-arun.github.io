@@ -23,6 +23,8 @@ html {
 }
 
 body {
+    max-width: 900px;
+    margin: 0 auto;
     background-color: var(--main-bg-color);
     color: var(--white-char-color);
     font-family: "Noto Sans JP", sans-serif;
@@ -32,25 +34,25 @@ body {
     touch-action: manipulation;
 }
 
-header {
-    margin-top: 60px;
-    position: relative;
+.header-btn-container {
+    width: auto;
+    height: 80px;
+    padding: 10px 20px 0;
+    display: flex;
+    align-items: center;
+    z-index: 1;
 }
 
 .title {
     font-size: 3em;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0;
     flex: 4;
 }
 
-#back-btn {
-    position: absolute;
+.header-btn {
     height: 50px;
     width: auto;
-    top: 40px;
-    left: 20px;
-    transform: translate(0%, -50%);
     cursor: pointer;
 }
 
@@ -58,16 +60,22 @@ header {
     .title {
         font-size: 2em;
     }
-    #back-btn {
+    .header-btn {
         height: 30px;
+    }
+    .header-btn-container {
+        height: 50px;
     }
 }
 @media screen and (max-width: 500px) {
     .title {
         font-size: 1.5em;
     }
-    #back-btn {
+    .header-btn {
         height: 20px;
+    }
+    .header-btn-container {
+        height: 40px;
     }
 }
 
