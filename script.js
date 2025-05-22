@@ -49,11 +49,15 @@ function updateResults() {
     
     const correctCount = logs.filter(log => log.isCorrect).length;
     const answerCount = logs.length;
+    const times = logs.map(log => log.time);
 
     document.getElementById('q-cor-cnt').textContent = correctCount;
     document.getElementById('q-cnt').textContent = answerCount;
     const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
     document.getElementById('q-cor-per').textContent = percent;
+
+    const avg = times.length > 0 ? (times.reduce((a, b) => {a + b}, 0) / times.length) : 0;
+    document.getElementById('time-avg').textContent = avg.toFixed(2);
 }
 
 let timerInterval = null;

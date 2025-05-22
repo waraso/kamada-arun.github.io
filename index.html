@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Rampart+One&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
-    <link rel='stylesheet' href='style.css?v=202505222250'>
+    <link rel='stylesheet' href='style.css?v=202505222320'>
 </head>
-<body >
+<body>
     <header>
         <div class="header-btn-container">
             <svg id="back-btn" class="header-btn hidden" width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,15 +21,22 @@
         <h1 class='title'>Binary Battle Practice Tool v2</h1>
     </header>
     <div id="results">
-        <span>
-            <span id="q-cor-cnt">-</span>問正解
-        </span>
-        <span>
-            /<span id="q-cnt">-</span>問
-        </span>
-        <span>
-            正解率:<span id="q-cor-per">-</span>%
-        </span>
+        <div>
+            <span>
+                <span id="q-cor-cnt">-</span>問正解
+            </span>
+            <span>
+                /<span id="q-cnt">-</span>問
+            </span>
+            <span>
+                正解率:<span id="q-cor-per">-</span>%
+            </span>
+        </div>
+        <div>
+            <span>
+                <span>平均回答時間:<span id="time-avg">-</span>秒</span>
+            </span>
+        </div>
     </div>
     <div style="position: relative;">
         <p id='q-number' class="rampart-one-regular">0</p>
@@ -60,5 +67,5 @@
         <button class="ans">1</button>
     </div>
 </body>
-<script src='script.js?v=202505222250'></script>
+<script src='script.js?v=202505222320'></script>
 </html>
