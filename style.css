@@ -33,6 +33,7 @@ body {
 }
 
 header {
+    margin-top: 60px;
     position: relative;
 }
 
@@ -47,8 +48,8 @@ header {
     position: absolute;
     height: 50px;
     width: auto;
-    top: 50%;
-    /* left: 0; */
+    top: 40px;
+    left: 20px;
     transform: translate(0%, -50%);
     cursor: pointer;
 }
