@@ -56,7 +56,7 @@ function updateResults() {
     const percent = answerCount > 0 ? Math.round((correctCount / answerCount) * 100) : 0;
     document.getElementById('q-cor-per').textContent = percent;
 
-    const avg = times.length > 0 ? (times.reduce((a, b) => {a + b}, 0) / times.length) : 0;
+    const avg = times.length > 0 ? (times.reduce((a, b) => a + b, 0) / times.length) : 0;
     document.getElementById('time-avg').textContent = avg.toFixed(2);
 }
 
