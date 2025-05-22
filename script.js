@@ -1,3 +1,6 @@
+let qNumMax = null;
+let qNumMin = null;
+
 /**
  * 乱数を生成する関数
  * @param {number} min - 最小値
@@ -13,7 +16,7 @@ function getRandomInt(min, max) {
 
 function changeNumber() {
     const qNumber = document.getElementById('q-number');
-    qNumber.textContent = getRandomInt(0, 255);
+    qNumber.textContent = getRandomInt(qNumMin, qNumMax);
 }
 
 function calcCorrectAnswer(
@@ -142,6 +145,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (index) {
         document.getElementById('index').value = index;
     }
+
+    const params = new URLSearchParams(window.location.search);
+    qNumMax = parseInt(params.get("max"), 10) || 255;
+    qNumMin = parseInt(params.get("min"), 10) || 0;
+
+    console.log('qNumMax:', qNumMax);
+    console.log('qNumMin:', qNumMin);
 
     updateResults();
 });

@@ -16,3 +16,6 @@ Binary Battle Practice Tool v2
   - 「Esc」 やめる
 - Local storageにログが保存されています。
   - ログを取り出す機能は実装していないですが、F12のApplicationから見ることができます。
+- クエリストリングでminとmaxを指定できます。`kamada-arun.github.io?min=-128&max=127`のように指定することができます。
+- PWAを実装しているので、インストールするとアプリのように使えます。
+- Issueとかプルリク投げてくれたら対応します。
