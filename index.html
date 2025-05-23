@@ -4,32 +4,39 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='icon' href='favicon.ico'>
-    <title>BBPT2</title>
+    <title>BBTP2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Rampart+One&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
-    <link rel='stylesheet' href='style.css?v=202505161320'>
+    <link rel='stylesheet' href='style.css?v=202505222340'>
 </head>
 <body>
-    <svg id="back-btn" class="hidden"  width="90" height="76" viewBox="0 0 90 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="34" y="25" width="56" height="26" fill="white"/>
-        <path d="M2.15366e-06 38L34.5 5.09103L34.5 70.909L2.15366e-06 38Z" fill="white"/>
-    </svg>
     <header>
+        <div class="header-btn-container">
+            <svg id="back-btn" class="header-btn hidden" width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 0.5V3H10V6H4V8.5L0 4.5L4 0.5Z" fill="white"/>
+            </svg>
+        </div>
         <h1 class='title'>Binary Battle Practice Tool v2</h1>
     </header>
-
     <div id="results">
-        <span>
-            <span id="q-cor-cnt">-</span>問正解
-        </span>
-        <span>
-            /<span id="q-cnt">-</span>問
-        </span>
-        <span>
-            正解率:<span id="q-cor-per">-</span>%
-        </span>
+        <div>
+            <span>
+                <span id="q-cor-cnt">-</span>問正解
+            </span>
+            <span>
+                /<span id="q-cnt">-</span>問
+            </span>
+            <span>
+                正解率:<span id="q-cor-per">-</span>%
+            </span>
+        </div>
+        <div>
+            <span>
+                <span>平均回答時間:<span id="time-avg">-</span>秒</span>
+            </span>
+        </div>
     </div>
     <div style="position: relative;">
         <p id='q-number' class="rampart-one-regular">0</p>
@@ -60,5 +67,5 @@
         <button class="ans">1</button>
     </div>
 </body>
-<script src='script.js?v=202505161320'></script>
+<script src='script.js?v=202505222340'></script>
 </html>
