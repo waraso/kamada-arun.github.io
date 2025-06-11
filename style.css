@@ -26,6 +26,19 @@ body {
     max-width: 900px;
     margin: 0 auto;
     background-color: var(--main-bg-color);
+    background: linear-gradient(45deg, 
+        #FF0000 0%,
+        #FF7F00 16%,
+        #FFFF00 33%,
+        #00FF00 50%,
+        #0000FF 66%,
+        #4B0082 83%,
+        #9400D3 100%
+    );
+    text-shadow:1px 1px 0 #000, -1px -1px 0 #000,
+              -1px 1px 0 #000, 1px -1px 0 #000,
+              0px 1px 0 #000,  0-1px 0 #000,
+              -1px 0 0 #000, 1px 0 0 #000;
     color: var(--white-char-color);
     font-family: "Noto Sans JP", sans-serif;
     font-optical-sizing: auto;
